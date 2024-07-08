@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include alfrasapp *.css
+recursive-include alfrasapp *.csv
+recursive-include alfrasapp *.html
+recursive-include alfrasapp *.ico
+recursive-include alfrasapp *.js
+recursive-include alfrasapp *.json
+recursive-include alfrasapp *.md
+recursive-include alfrasapp *.png
+recursive-include alfrasapp *.py
+recursive-include alfrasapp *.svg
+recursive-include alfrasapp *.txt
+recursive-exclude alfrasapp *.pyc
