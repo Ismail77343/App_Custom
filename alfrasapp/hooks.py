@@ -180,7 +180,14 @@ user_data_fields = [
 		"doctype": "{doctype_4}"
 	}
 ]
-
+fixtures = [
+    {
+        "doctype": "Print Format",
+        "filters": [
+            ["name", "in", ["Alfras Pos Invoic"]]
+        ]
+    }
+]
 # Authentication and authorization
 # --------------------------------
 
