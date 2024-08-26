@@ -16,4 +16,5 @@ def after_install_tasks():
 def disable_update_popup():
     # تعطيل ظهور رسالة التحديث
     frappe.db.set_value("System Settings", "System Settings", "disable_system_update_notification", 1)
+    frappe.db.set_value("System Settings", "System Settings", "enable_onboarding", 0)
     frappe.clear_cache()
