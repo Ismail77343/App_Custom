@@ -1,0 +1,125 @@
+/* تصميم الشريط العلوي */
+/* *{
+  background: black !important;
+} */
+ .navbar{
+  height: 86px;
+  box-shadow: 0 5px 7px -1px rgba(0, 142, 204, 0.3) !important;
+  background: linear-gradient(141.55deg, #ffffff 3.46%, #cfcfcf 99.86%), #a8b7bd !important;
+ }
+ .navbar-nav{
+  /* box-shadow: 0 5px 7px -1px rgba(0, 142, 204, 0.3) !important;
+    background: linear-gradient(141.55deg, #ffffff 3.46%, #cfcfcf 99.86%), #a8b7bd !important; */
+    background-color: white !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    border-radius: 8px !important;
+    padding: 19px !important;
+    border: 3px #0f79ae solid;
+ }
+ #navbar-search{
+  border-radius: 8px !important;
+  padding: 19px !important;
+  border: 3px #0788c9 solid;
+  width: 94% !important;
+  z-index: 1;
+  height: 48px;
+ }
+ #navbar-breadcrumbs *{
+  display: inline !important;
+ }
+ #navbar-breadcrumbs{
+  display: block !important;
+ }
+ .search-bar .search-icon{
+  position: absolute;
+  right: 0px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 60px;
+  height: 101%;
+  color: var(--light);
+  text-align: center;
+  background-color: #0788c9;
+  cursor: pointer;
+  border: none;
+  height: 55px;
+  border-radius: var(--border-radius);
+ }
+ .search-bar svg{
+  stroke: #fff2f2;
+ }
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f9f9f9;
+  padding: 5px 20px;
+  font-size: 14px;
+}
+
+.top-links a {
+  margin-right: 15px;
+  text-decoration: none;
+  color: #666;
+}
+
+.top-links select {
+  margin-right: 10px;
+  padding: 3px;
+  font-size: 14px;
+}
+
+/* تصميم الـ header الرئيسي */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+}
+
+.logo img {
+  height: 40px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.search-bar select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-right: none;
+  background-color: #f9f9f9;
+}
+
+.search-bar input[type="text"] {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-right: none;
+}
+
+.search-bar button {
+  padding: 10px;
+  background-color: orange;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.header-icons a {
+  margin-left: 15px;
+  text-decoration: none;
+  color: #666;
+  font-size: 18px;
+}
+
+.header-icons a:hover {
+  color: orange;
+}

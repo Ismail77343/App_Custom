@@ -11,8 +11,8 @@ app_license = "MIT"
 
 # Includes in <head>
 # ------------------
-app_include_css = "/assets/alfrasapp/css/desk.css"
-app_include_js = "/assets/alfrasapp/js/desk32.js"
+app_include_css = "/assets/alfrasapp/css/desk12.css"
+app_include_js = "/assets/alfrasapp/js/desk46.js"
 
 # Installation
 # ------------
@@ -31,8 +31,7 @@ after_install = "alfrasapp.install.after_install_tasks"
 #		"on_cancel": "method",
 #		"on_trash": "method"
 #	}
-# }
-
+# 
 # Testing
 # -------
 # before_tests = "alfrasapp.install.before_tests"

@@ -53,44 +53,10 @@ function generateSlug(title) {
 frappe.after_ajax(function() {
     $(document).ready(function() {
         setTimeout(function() {
-            frappe.call({
-                method: 'alfrasapp.config.controller.get_workspaces',
-                callback: function(response) {
-                    let workspaces = response.message;
-                    let root_pages = {};
-
-                    workspaces.forEach(workspace => {
-                        if (!workspace.parent_page) {
-                            root_pages[workspace.name] = {
-                                title: workspace.title,
-                                url: `/app/${generateSlug(workspace.name)}`,
-                                children: {}
-                            };
-                        } else {
-                            if (!root_pages[workspace.parent_page]) {
-                                root_pages[workspace.parent_page] = {
-                                    title: workspace.parent_page,
-                                    url: `/app/${generateSlug(workspace.parent_page)}`,
-                                    children: {}
-                                };
-                            }
-                            root_pages[workspace.parent_page].children[workspace.name] = {
-                                title: workspace.title,
-                                url: `/app/${generateSlug(workspace.name)}`
-                            };
-                        }
-                    });
-
-                    Object.keys(root_pages).forEach(key => {
-                        build_top_menu_section(root_pages[key].title, root_pages[key].children);
-                    });
-                }
-            });
-
-            let sidebarMenu = document.querySelector('.sidebar-menu');
-            if (sidebarMenu) {
-                sidebarMenu.style.display = 'none';
-            }
+ // حذف الـ header الافتراضي
+            $path=document.getElementById("navbar-breadcrumbs");
+            $nav=document.getElementsByClassName("sticky-top")[0];
+            $nav.appendChild($path);
         }, 1000);
     });
 });
