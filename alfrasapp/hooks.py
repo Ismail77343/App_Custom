@@ -11,12 +11,12 @@ app_license = "MIT"
 
 # Includes in <head>
 # ------------------
-app_include_css = "/assets/alfrasapp/css/desk12.css"
-app_include_js = "/assets/alfrasapp/js/desk46.js"
+app_include_css = "/assets/alfrasapp/css/desk19.css"
+app_include_js = "/assets/alfrasapp/js/desk63.js"
 
 # Installation
 # ------------
-after_install = "alfrasapp.install.after_install_tasks"
+# after_install = "alfrasapp.install.after_install_tasks"
 
 # Uninstallation
 # ------------
