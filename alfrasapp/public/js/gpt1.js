@@ -204,7 +204,7 @@ recognition.onresult = function(event) {
   transcript=transcript.replaceAll("open","");
   transcript=transcript.replaceAll("interface","list");
   frappe.call({
-    method:'gpt.api.search_and_open_interface',//'frappe.desk.search.search_link',
+    method:'alfrasapp.gpt.api.search_and_open_interface',//'frappe.desk.search.search_link',
     args:{
       // doctype:"DocType",
       //txt:transcript,
