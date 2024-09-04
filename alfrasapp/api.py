@@ -1,6 +1,6 @@
 import frappe
-import speech_recognition as sr
-import pyaudio
+# import speech_recognition as sr
+# import pyaudio
 import frappe.desk.search
 from frappe import whitelist
 from frappe.desk.search import search_link
@@ -59,8 +59,13 @@ def Speak(text):
     # frappe.msgprint(text)
 
 
+
+    
 @frappe.whitelist()
 def search_and_open_interface(text):
+    print("Hello Every Things")
+    
+    # return "fff"
     search_link("DocType", text,
     query="frappe.core.report.permitted_documents_for_user.permitted_documents_for_user.query_doctypes",
 	filters={"user": "Administrator"},

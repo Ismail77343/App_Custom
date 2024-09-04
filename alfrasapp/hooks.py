@@ -11,8 +11,17 @@ app_license = "MIT"
 
 # Includes in <head>
 # ------------------
-app_include_css = "/assets/alfrasapp/css/desk20.css"
-app_include_js = ["/assets/alfrasapp/js/desk63.js","/assets/alfrasapp/js/gpt1.js"]
+app_include_css = "/assets/alfrasapp/css/desk25.css"
+app_include_js = ["/assets/alfrasapp/js/desk63.js","/assets/alfrasapp/js/gpt4.js"]
+
+
+# app_include_js = [
+#     "/assets/js/login.js"
+# ]
+
+# website_route_rules = [
+#     {"from_route": "/login", "to_route": "login"}
+# ]
 
 # Installation
 # ------------

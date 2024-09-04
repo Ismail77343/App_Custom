@@ -200,11 +200,13 @@ recognition.onresult = function(event) {
   transcript=transcript.replaceAll("الموردون","مورد");
   transcript=transcript.replaceAll("المورد","مورد");
   transcript=transcript.replaceAll("واجهة","قائمة");
+  transcript=transcript.replaceAll("واجهه","");
+  transcript=transcript.replaceAll("واجهات","");
   transcript=transcript.replaceAll("افتح","");
   transcript=transcript.replaceAll("open","");
   transcript=transcript.replaceAll("interface","list");
   frappe.call({
-    method:'alfrasapp.gpt.api.search_and_open_interface',//'frappe.desk.search.search_link',
+    method:'alfrasapp.api.search_and_open_interface',//'frappe.desk.search.search_link',
     args:{
       // doctype:"DocType",
       //txt:transcript,
@@ -212,7 +214,9 @@ recognition.onresult = function(event) {
 
     },
     callback:function(response){
-      console.log(response)
+      
+      console.log(response);
+      console.log("responseing");
       
       function getDomainName() {
         const url = new URL(window.location.href);
