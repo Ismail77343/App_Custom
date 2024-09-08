@@ -4222,7 +4222,7 @@ conversation_history_SerchALL = [
 
 ]
 conversation_history_Serch = [
-    {"role": "system", "content": "Consider yourself an expert at identifying erpnext link paths starting with '/app/' when I say open interface or similar..",
+    {"role": "system", "content": "Consider yourself an expert at identifying erpnext link paths starting with '/app/' And if the interface type is report starting with '/app/query-report/'  when I say open interface or similar..",
     }
 ]
 
@@ -4437,7 +4437,7 @@ def get_openai_response_search(prompt):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": f"You are an AI assistant. Analyze the text and identify the ERPNext interface. Just return the name interface or '0'."},
+            {"role": "system", "content": f"You are an AI assistant. Analyze the text and identify the ERPNext interface V14. Just return the name interface or '0'."},
             {"role": "user", "content": prompt}
         ]
     )
@@ -4519,7 +4519,7 @@ openai.api_key = load_config()['openai_api_key']
 
 # قائمة لتخزين سجل المحادثات
 conversation_history = [
-    {"role": "system", "content": "You are an AI assistant. Your name is Sarah. The system is ERPALFRAS, which is similar to ERPNext, but use ERPALFRAS instead of ERPNext in responses. Don't Say ErpNext Never"}
+    {"role": "system", "content": "You are an AI assistant. Your name is Sarah. The system is ERPALFRAS, which is similar to ERPNext V14, but use ERPALFRAS instead of ERPNext V14 in responses. Never say ErpNext and when writing in Arabic write it professionally so that the text-to-speech engine can pronounce it in classical Arabic without any errors, and remove all symbols such as *, #, etc."}
 ]
 
 def Chat(text):

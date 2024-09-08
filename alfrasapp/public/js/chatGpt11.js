@@ -1,6 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
-    alert("ss")
+    // alert("ss")
     // وظيفة لتشغيل الرسالة الصوتية
+
+
+
+const synth = window.speechSynthesis;
+
 function playArabicAudio(message,message_eng="") {
     // إنشاء utterance جديد
     lang="en-US";
@@ -19,6 +24,8 @@ function playArabicAudio(message,message_eng="") {
     // تشغيل الرسالة الصوتية
     synth.speak(utterance);
   }
+
+  
     // إضافة الويدجت عند تحميل الصفحة
     $('body').append(`
         <div id="chat-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 999;">
@@ -41,6 +48,7 @@ function playArabicAudio(message,message_eng="") {
     // أحداث الويدجت
     $('#open-chat').on('click', function() {
         $('#chat-box').toggle();
+        window.speechSynthesis.cancel();
     });
 
     $('#send-message').on('click', function() {
@@ -63,10 +71,11 @@ function playArabicAudio(message,message_eng="") {
                         }
                     }else{
                         $('#chat-box').append(`<p><b>Wraning:</b> Your Limit Is Finsh Please Try Agine After 10m</p>`);
-                        $('#chat-input').val('');
                     }
                 }
             });
         }
     });
+
+
 });

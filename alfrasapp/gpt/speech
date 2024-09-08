@@ -1,0 +1,21 @@
+from gradio_client import Client
+
+@frappe.whitelist()
+def speek():
+    # إعداد عميل Gradio
+    client = Client("https://baseta-basetatube-rvc-tts.hf.space/--replicas/zqn86/")
+
+    # تحديد النص الذي تريد تحويله إلى كلام
+    text = "هذا هو النص الذي تريد تحويله إلى كلام."
+
+    # تحديد نموذج الصوت من القائمة المتاحة
+    voice_model = "Da7ee7.pth"  # اختر النموذج المناسب من القائمة التي يوفرها الموقع
+
+    # طلب تحويل النص إلى كلام
+    result = client.predict(
+        voice_model,  # نموذج الصوت
+        text,         # النص الذي سيتم تحويله
+        fn_index=0    # استخدم fn_index المناسب للموديل في الواجهة
+    )
+
+    print(result)
