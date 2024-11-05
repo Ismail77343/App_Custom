@@ -1,6 +1,6 @@
 function addCustombackGround() {
     // تحقق مما إذا كان شريط التنقل جاهزًا
-    alert("dd");
+    // alert("dd");
     if (document.querySelector('.main-section')) {
         let top_menu_section = $(
             `<div class="top-menu-section dropdown" data-title="${title}">

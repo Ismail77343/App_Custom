@@ -4265,7 +4265,7 @@ def Analyze(text):
             messages=[
                 {
                     "role": "system",
-                    "content": "Return 1 if the user wants to open a specific interface. Return 0 otherwise."
+                    "content": "Return 1 if the user wants to open a specific interface.Return 2 if the user wants to changed language in speek. Return 0 otherwise."
                 },
                 {
                     "role": "user",
@@ -4273,13 +4273,14 @@ def Analyze(text):
                 }
             ]
         )
-
         # استخراج وإرجاع النتيجة (إما 1 أو 0 فقط)
         result = response['choices'][0]['message']['content'].strip()
 
         # تأكد من أن النتيجة تكون إما 1 أو 0 فقط
         if result == '1':
             return 1
+        elif result == '2':
+            return 2
         else:
             return 0
 
@@ -4317,6 +4318,8 @@ def StartGPT(text):
                     "msg":'لم يتم ايجاد الواجهة',
                     "lang":frappe.local.lang   
                 }
+    elif Ch==2:
+        return languagespeech(text)
     else:
         GPT=Chat(text)
         return {
@@ -4519,7 +4522,7 @@ openai.api_key = load_config()['openai_api_key']
 
 # قائمة لتخزين سجل المحادثات
 conversation_history = [
-    {"role": "system", "content": "You are an AI assistant. Your name is Sarah. The system is ERPALFRAS, which is similar to ERPNext V14, but use ERPALFRAS instead of ERPNext V14 in responses. Never say ErpNext and when writing in Arabic write it professionally so that the text-to-speech engine can pronounce it in classical Arabic without any errors, and remove all symbols such as *, #, etc."}
+    {"role": "system", "content": "You are an AI assistant, your name is Sarah, you can speak any language, the system is ERPALFRAS, it is similar to ERPNext V14, but use ERPALFRAS and in Arabic is ERPالفراص instead of ERPNext V14 in the responses, never say ErpNext and when writing in Arabic write it professionally so that the text-to-speech engine can pronounce it in standard Arabic without any errors and respond according to the language sent to you, for example if the request is English respond in English and if it is Arabic respond in Arabic and so on, No speek this word ERPNEXT never"}
 ]
 
 def Chat(text):
@@ -4542,3 +4545,81 @@ def Chat(text):
     except Exception as e:
         # print(f"Error occurred: {e}")
         return "An error occurred while processing your request."
+
+
+
+
+def languagespeech(text):
+    # تحميل إعدادات API من ملف التكوين
+    with open('common_site_config.json') as config_file:
+        config = json.load(config_file)
+    
+    # تعيين مفتاح OpenAI API
+    openai.api_key = config['openai_api_key']
+
+    # قائمة اللغات المتاحة (الرموز فقط)
+    lang_dict = {
+        "ar-SA": "Arabic Female",
+        "en-US": "US English Female",
+        "en-GB": "UK English Female",
+        "es-ES": "Spanish Female",
+        "fr-FR": "French Female",
+        "de-DE": "German Female",
+        "it-IT": "Italian Female",
+        "pt-BR": "Portuguese Female",
+        "ru-RU": "Russian Female",
+        "zh-CN": "Chinese Female",
+        "ja-JP": "Japanese Female",
+        "ko-KR": "Korean Female",
+        "hi-IN": "Hindi Female",
+        "sv-SE": "Swedish Female",
+        "pl-PL": "Polish Female",
+        "tr-TR": "Turkish Female",
+        "da-DK": "Danish Female",
+        "no-NO": "Norwegian Female",
+        "fi-FI": "Finnish Female",
+        "cs-CZ": "Czech Female",
+        "sk-SK": "Slovak Female",
+        "hu-HU": "Hungarian Female",
+        "ro-RO": "Romanian Female",
+        "el-GR": "Greek Female",
+        "fil-PH": "Filipino Female",
+        "bn-BD": "Bangla Bangladesh Female"
+    }
+    
+    try:
+        # إرسال الطلب إلى OpenAI ChatCompletion
+        response = openai.ChatCompletion.create(
+            model="gpt-4",
+            messages=[
+                {
+                    "role": "system",
+                    "content": f"You are an expert at detecting the language the user wants and returning the language code from this JSON list: {json.dumps(list(lang_dict.keys()))}. If the language is not found in the list, return 'en-US'. Do not include any additional text."
+                },
+                {
+                    "role": "user",
+                    "content": f"Request: {text}"
+                }
+            ]
+        )
+        
+        # استخراج النتيجة (الرمز)
+        result = response['choices'][0]['message']['content'].strip()
+
+        # تأكد من أن النتيجة ضمن قائمة الرموز المتاحة
+        if result in lang_dict:
+            lang = result  # هنا يتم إرجاع الرمز مثل "ar-SA"
+        else:
+            lang = 'en-US'  # في حالة لم يكن الرمز موجودًا، يعود إلى 'en-US'
+
+    except Exception as e:
+        # في حال حدوث خطأ، إرجاع اللغة الافتراضية
+        lang = 'en-US'
+
+    GPT = Chat(text)
+    return {
+        "options": "ChangeLang",
+        "Error": 'false',
+        "msg": GPT,
+        "lang": lang
+    }
