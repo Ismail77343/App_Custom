@@ -100,13 +100,17 @@ document.head.appendChild(script);
 function speakText(message, message_eng = "", rec = false) {
     // تحقق مما إذا كانت المكتبة جاهزة
     // alert("Dss");
+    playArabicAudio(message,message_eng,rec);
+    return 0;
+    Speaking=true;
     var voices=[{"ar-SA":"Arabic Female","en-US":"US English Female","en-GB":"UK English Female","es-ES":"Spanish Female","fr-FR":"French Female","de-DE":"US English Female","it-IT":"Italian Female","pt-BR":"Portuguese Female","ru-RU":"Russian Female","zh-CN":"Chinese Female","ja-JP":"Japanese Female","ko-KR":"Korean Female","hi-IN":"Hindi Female","sv-SE":"Swedish Female","pl-PL":"UK English Female","tr-TR":"Turkish Female","da-DK":"UK English Female","no-NO":"Norwegian Female","fi-FI":"UK English Female","cs-CZ":"UK English Female","sk-SK":"Slovak Female","hu-HU":"UK English Female","ro-RO":"Romanian Female","el-GR":"Greek Female","fil-PH":"Filipino Female","bn-BD":"Bangla Bangladesh Female"}]
 
     if (typeof responsiveVoice !== 'undefined') {
         msg=frappe.boot.lang === "ar" ? message : message_eng;
         var voice=voices[0][selectedlang];//frappe.boot.lang === "ar"?"Arabic Female":"UK English Female";
         running=false;
-        // console.log("Voice : "+voices[0][selectedlang]);
+        console.log("------------");
+        console.log("Voice : "+voices[0][selectedlang]);
         
         // playArabicAudio(message,message_eng,rec)
 
@@ -121,6 +125,9 @@ function speakText(message, message_eng = "", rec = false) {
                 if (rec) {
                     // alert("end");
                     // running=true;
+                    setTimeout(() => {
+                        Speaking = false;
+                    }, 1000);
                     setTimeout(record, 1000); // إعادة تشغيل التسجيل بعد تأخير بسيط
                 }
             }
@@ -142,6 +149,7 @@ if(localStorage.getItem("lang") != null)
 // alert(frappe.boot.lang);
 // وظيفة لتشغيل الرسالة الصوتية
 function playArabicAudio(message, message_eng = "", rec = false) {
+    Speaking=true;
     // const synth = window.speechSynthesis;
     const utterance = new SpeechSynthesisUtterance(frappe.boot.lang === "ar" ? message : message_eng);
     utterance.lang = selectedlang; //frappe.boot.lang === "ar" ? 'ar-SA' : 'en-US';
@@ -151,13 +159,15 @@ function playArabicAudio(message, message_eng = "", rec = false) {
         if (rec) {
             $('#chats-gpt').append(`<p ><p align="left">Sara:</p> <p class="chat-sara">${message}</p></p>`);
             $("#chats-gpt").scrollTop($("#chats-gpt")[0].scrollHeight);
-
+            setTimeout(() => {
+                Speaking = false;
+            }, 1000);
             // alert("end");
             // running=true;
             setTimeout(record, 1000); // إعادة تشغيل التسجيل بعد تأخير بسيط
         }
     };
-    running=false;
+    // running=false;
     synth.speak(utterance);
 }
 
@@ -334,6 +344,7 @@ function answer(transcript,rec=false){
       // });
 }
 var running = false;
+var Speaking = false;
 var startedRec = false;
 
 function record() {
@@ -352,7 +363,7 @@ function record() {
             console.log("Transcript:", transcript);
 
             // التحقق من الكلمات المفتاحية
-            if (transcript.includes("أحمد") || transcript.includes("احمد") || transcript.includes("سارة") || transcript.includes("ساره") || transcript.toLowerCase().includes("sara") || transcript.toLowerCase().includes("sarah") || running || $("#chat-box").css("display") !== "none") {
+            if ((transcript.includes("أحمد") || transcript.includes("احمد") || transcript.includes("سارة") || transcript.includes("ساره") || transcript.toLowerCase().includes("sara") || transcript.toLowerCase().includes("sarah") || running || $("#chat-box").css("display") !== "none") && !Speaking ) {
                 // speakText("نعم انا هنا ماذا تريد", "Yes, I am here. What do you want?", true);
                 $("#chat-box").show(); // إظهار صندوق الدردشة إذا كان مخفيًا
                 if(transcript.trim()!=""){
@@ -378,6 +389,7 @@ function record() {
                 // $("#send-message").click(); // إرسال الرسالة
                 
             } else if(transcript.includes("توقف") || transcript.toLowerCase().includes("stop")  || transcript.toLowerCase().includes("shutup") || transcript.includes("يكفي كلام")){
+                Speaking=false;
                 responsiveVoice.cancel();
                 window.speechSynthesis.cancel();
                 // يمكن إضافة وظيفة للتعامل مع النصوص الأخرى هنا

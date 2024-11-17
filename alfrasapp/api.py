@@ -8,7 +8,58 @@ import json
 import os
 import json
 import openai
+import subprocess
+import os
 
+
+@whitelist(allow_guest=True)
+def testconnect():
+    return "hh"
+
+
+@frappe.whitelist(allow_guest=True)
+def create_new_site_via_api(customer_name, customer_email, subscription_plan): 
+    site_name = f"{customer_name.lower()}_site" 
+    db_name = f"{customer_name.lower()}_db" 
+    admin_password = "default_password"  #  انه رورملا ةملك صيصخت 
+ 
+    #  عقوملا ءاشنإ ةفيظو ءاعدتسا 
+    create_new_site(site_name, db_name, admin_password, customer_email) 
+     
+    return {"message": "Site created successfully"}
+
+def create_new_site(site_name, db_name, admin_password, customer_email): 
+    try: 
+        # بناء أمر bench في سلسلة نصية
+        command = f"bench new-site {site_name} --db-name {db_name} --admin-password {admin_password} --install-app erpnext"
+        
+        # تشغيل الأمر
+        os.system(command)
+        
+        print(f"Site '{site_name}' created successfully!")
+        
+        # إرسال إشعار بالبريد الإلكتروني للعميل
+        send_email_notification(customer_email, site_name)
+
+    except Exception as e: 
+        print(f"An unexpected error occurred: {e}")
+
+
+def send_email_notification(email, site_name): 
+    subject = "Your ERPNext Site is Ready"
+    message = f"""Dear Customer,
+
+Your ERPNext site '{site_name}' has been created successfully.
+You can access it at: https://{site_name}.yourdomain.com
+
+Thank you for choosing us!"""
+     
+    # استخدام وظيفة الإرسال عبر البريد الإلكتروني في Frappe
+    frappe.sendmail( 
+        recipients=email, 
+        subject=subject, 
+        message=message 
+    )
 
 @whitelist(allow_guest=True)
 def start_audio_recording():
