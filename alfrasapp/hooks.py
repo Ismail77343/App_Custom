@@ -25,7 +25,7 @@ app_include_js = ["/assets/alfrasapp/js/desk63.js","/assets/alfrasapp/js/gpt145.
 
 # Installation
 # ------------
-# after_install = "alfrasapp.install.after_install_tasks"
+after_install = "alfrasapp.install.after_install_tasks"
 
 # Uninstallation
 # ------------

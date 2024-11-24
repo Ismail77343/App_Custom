@@ -12,7 +12,7 @@ import re
 
 # قائمة لتخزين سجل المحادثات
 conversation_history_SerchALL = [
-    {"role": "system", "content": "Consider yourself an expert at identifying erpnext link paths starting with '/app/' when I say open interface or similar..",
+    {"role": "system", "content": "Consider yourself an expert at identifying erpalfras link paths starting with '/app/' when I say open interface or similar..",
     },{"role": "assistant", "content": '''     {
         "Type": "doctype",
         "english_name": "KSA VAT Setting",
@@ -4222,7 +4222,7 @@ conversation_history_SerchALL = [
 
 ]
 conversation_history_Serch = [
-    {"role": "system", "content": "Consider yourself an expert at identifying erpnext link paths starting with '/app/' And if the interface type is report starting with '/app/query-report/'  when I say open interface or similar..",
+    {"role": "system", "content": "Consider yourself an expert at identifying erpalfras link paths starting with '/app/' And if the interface type is report starting with '/app/query-report/'  when I say open interface or similar..",
     }
 ]
 
@@ -4440,7 +4440,7 @@ def get_openai_response_search(prompt):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": f"You are an AI assistant. Analyze the text and identify the ERPNext interface V14. Just return the name interface or '0'."},
+            {"role": "system", "content": f"You are an AI assistant. Analyze the text and identify the erpalfras interface V14. Just return the name interface or '0'."},
             {"role": "user", "content": prompt}
         ]
     )
@@ -4522,7 +4522,7 @@ openai.api_key = load_config()['openai_api_key']
 
 # قائمة لتخزين سجل المحادثات
 conversation_history = [
-    {"role": "system", "content": "You are an AI assistant, your name is Sarah, you can speak any language, the system is ERPALFRAS, it is similar to ERPNext V14, but use ERPALFRAS and in Arabic is ERPالفراص instead of ERPNext V14 in the responses, never say ErpNext and when writing in Arabic write it professionally so that the text-to-speech engine can pronounce it in standard Arabic without any errors and respond according to the language sent to you, for example if the request is English respond in English and if it is Arabic respond in Arabic and so on, No speek this word ERPNEXT never"}
+    {"role": "system", "content": "You are an AI assistant, your name is Sarah, you can speak any language, the system is ERPALFRAS, it is similar to erpalfras V14, but use ERPALFRAS and in Arabic is ERPالفراص instead of erpalfras V14 in the responses, never say erpalfras and when writing in Arabic write it professionally so that the text-to-speech engine can pronounce it in standard Arabic without any errors and respond according to the language sent to you, for example if the request is English respond in English and if it is Arabic respond in Arabic and so on, No speek this word erpalfras never"}
 ]
 
 def Chat(text):

@@ -31,7 +31,7 @@ def create_new_site_via_api(customer_name, customer_email, subscription_plan):
 def create_new_site(site_name, db_name, admin_password, customer_email): 
     try: 
         # بناء أمر bench في سلسلة نصية
-        command = f"bench new-site {site_name} --db-name {db_name} --admin-password {admin_password} --install-app erpnext"
+        command = f"bench new-site {site_name} --db-name {db_name} --admin-password {admin_password} --install-app erpalfras"
         
         # تشغيل الأمر
         os.system(command)
@@ -46,10 +46,10 @@ def create_new_site(site_name, db_name, admin_password, customer_email):
 
 
 def send_email_notification(email, site_name): 
-    subject = "Your ERPNext Site is Ready"
+    subject = "Your erpalfras Site is Ready"
     message = f"""Dear Customer,
 
-Your ERPNext site '{site_name}' has been created successfully.
+Your erpalfras site '{site_name}' has been created successfully.
 You can access it at: https://{site_name}.yourdomain.com
 
 Thank you for choosing us!"""
@@ -95,7 +95,7 @@ def start_audio_recording():
 @frappe.whitelist()
 def Speak(text):
     text=text.lower()
-    # # استخدام دالة البحث المدمجة في ERPNext للبحث عن الكلمة الرئيسية
+    # # استخدام دالة البحث المدمجة في erpalfras للبحث عن الكلمة الرئيسية
     results = frappe.get_all("DocType", filters={'name': ['like', '%' + text + '%']})
     
     if results:
@@ -140,7 +140,7 @@ def get_openai_response_search(prompt):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": f"You are an AI assistant. Analyze the text and identify the ERPNext interface. Just return the URL or '0'. Here are the Data Interfaces: {interface_links_str}"},
+            {"role": "system", "content": f"You are an AI assistant. Analyze the text and identify the erpalfras interface. Just return the URL or '0'. Here are the Data Interfaces: {interface_links_str}"},
             {"role": "user", "content": prompt}
         ]
     )
@@ -281,7 +281,7 @@ def analyze_and_get_link(text):
 
 # قم بتخزين المحادثة السابقة في هذه القائمة
 conversation_history = [
-    {"role": "system", "content": "You are an AI assistant in the ERPALFRAS system. Your name is Sarah. The ERPALFRAS system is the same as the ERPNEXT system, but never say ERPNEXT and replace it with ERPALFRAS in your output. If anyone asks for your name, tell them your name is Sarah."}
+    {"role": "system", "content": "You are an AI assistant in the ERPALFRAS system. Your name is Sarah. The ERPALFRAS system is the same as the erpalfras system, but never say erpalfras and replace it with ERPALFRAS in your output. If anyone asks for your name, tell them your name is Sarah."}
 ]
 
 def get_openai_response2(prompt):
