@@ -2,26 +2,30 @@ import os
 import frappe
 
 def after_install_tasks():
-    print("dddd")
     installDocumention()
 
 def installDocumention():
-    print("dddd22222")
-
     try:
-        # البحث عن إعدادات Navbar
         navbar_settings = frappe.get_single("Navbar Settings")
 
-        # تحديث عنصر Documentation في جدول Help Dropdown
+        # تحديث عنصر Documentation
+        updated = False
         for item in navbar_settings.help_dropdown:
             if item.item_label == "Documentation":
-                item.item_type = "Route"  # تأكد من أن نوع العنصر Route
-                item.route = "https://doc.erpalfras.com"  # قم بتغيير الرابط هنا
-        
-        # حفظ التعديلات
-        navbar_settings.save()
+                item.item_type = "Route"
+                item.route = "https://doc.erpalfras.com"
+                updated = True
+
+        # حفظ التغييرات
+        if updated:
+            navbar_settings.save()
+            print("Documentation URL updated successfully!")
+        else:
+            print("No Documentation item found to update.")
+
     except Exception as e:
         frappe.log_error(message=str(e), title="Error Updating Documentation URL")
+        print(f"An error occurred: {e}")
 # # def remove_onboarding():
 # #     # التأكد من أن المستخدم قد تم تسجيل دخوله
 # #     # if frappe.session.user != "Guest":
