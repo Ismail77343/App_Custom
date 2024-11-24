@@ -45,7 +45,7 @@ function typeMessage(selector, text, delay = 50) {
     $('body').append(`
         <div id="chat-widget" style="">
             <button id="open-chat" style="background-color: #0788c9; color: white; border: none; padding: 10px 20px; border-radius: 50px;">
-                <i class="fa fa-comments"></i> Talk With Us
+                <i class="fa fa-comments"></i> Talk With AI
             </button>
             <div id="chat-box" style="display: none; background-color: white; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 10px; width: 300px;  ">
                 
