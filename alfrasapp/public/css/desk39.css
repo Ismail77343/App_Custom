@@ -16,12 +16,12 @@
     padding-bottom: 5px !important;
     border-radius: 8px !important;
     padding: 19px !important;
-    border: 3px #0f79ae solid;
+    border: 3px black solid;
  }
  #navbar-search{
   border-radius: 8px !important;
   padding: 19px !important;
-  border: 3px #0788c9 solid;
+  border: 3px black solid;
   width: 94% !important;
   z-index: 1;
   height: 48px;
@@ -45,7 +45,7 @@
     height: 101%;
     color: var(--light);
     text-align: center;
-    background-color: #0788c9;
+    background-color: black;
     cursor: pointer;
     border: none;
     height: 55px;
@@ -160,19 +160,24 @@
 .sidebar-item-label{
   text-align: center !important;
 }
+select,textarea,.list-sidebar-button,.custom-btn-group button[data-toggle="dropdown"],.btn-new-doc,.btn-group{
+ border: black solid 1px !important
+}
 .list-sidebar {
-  width: 80%;
-  border-bottom: 4px solid #0788c9;
+  /* width: 80%;
+  border-bottom: 4px solid black;
   border-radius: 10px;
   background: #ffffffab;
-  border-right: 4px solid #0788c9;
-  border-left: 4px solid #0788c9;
+  border-right: 4px solid black;
+  border-left: 4px solid black; */
+  background: transparent !important;
+
 }
 .page-head-content{
-  background: #ffffffab !important;
-  border-radius: 50px 10px 10px 0 !important;
-  border-top: 4px solid #0788c9;
-  border-left: 4px solid #0788c9;
+  background: transparent !important;
+  /* border-radius: 50px 10px 10px 0 !important;
+  border-top: 4px solid black;
+  border-left: 4px solid black; */
 }
 .page-head{
   margin: 0 !important;

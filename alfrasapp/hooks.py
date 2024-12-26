@@ -11,7 +11,7 @@ app_license = "MIT"
 
 # Includes in <head>
 # ------------------
-app_include_css = ["/assets/alfrasapp/css/desk25.css","/assets/alfrasapp/css/chatGpt11.css"]
+app_include_css = ["/assets/alfrasapp/css/desk39.css","/assets/alfrasapp/css/chatGpt11.css"]
 app_include_js = ["/assets/alfrasapp/js/desk63.js","/assets/alfrasapp/js/gpt145.js","/assets/alfrasapp/js/chatGpt51.js"]
 
 
