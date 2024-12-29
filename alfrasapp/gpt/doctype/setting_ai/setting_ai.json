@@ -1,0 +1,45 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-12-28 16:32:02.852890",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_nwnl",
+  "openai_api_key"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_nwnl",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "openai_api_key",
+   "fieldtype": "Data",
+   "label": "openai api key"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2024-12-28 16:35:45.033777",
+ "modified_by": "Administrator",
+ "module": "GPT",
+ "name": "Setting AI",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

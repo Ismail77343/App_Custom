@@ -4228,9 +4228,11 @@ conversation_history_Serch = [
 
 
 def get_openai_response2(prompt):
-    with open('common_site_config.json') as config_file:
-        config = json.load(config_file)
-    openai.api_key = config['openai_api_key']
+    # with open('common_site_config.json') as config_file:
+    #     config = json.load(config_file)
+    # fthrow("ddd")
+    # openai.api_key = config['openai_api_key']
+    get_Key_Open_AI()
 
     # إضافة مدخل المستخدم الحالي إلى المحادثة
     conversation_history.append({"role": "user", "content": prompt})
@@ -4252,12 +4254,12 @@ def get_openai_response2(prompt):
 
 def Analyze(text):
     # تحميل إعدادات API من ملف التكوين
-    with open('common_site_config.json') as config_file:
-        config = json.load(config_file)
+    # with open('common_site_config.json') as config_file:
+    #     config = json.load(config_file)
     
-    # تعيين مفتاح OpenAI API
-    openai.api_key = config['openai_api_key']
-
+    # # تعيين مفتاح OpenAI API
+    # openai.api_key = config['openai_api_key']
+    get_Key_Open_AI()
     # إرسال الطلب إلى OpenAI ChatCompletion
     try:
         response = openai.ChatCompletion.create(
@@ -4430,10 +4432,10 @@ def analyze_and_get_link(text):
 
 # وظيفة لتحليل النص باستخدام OpenAI
 def get_openai_response_search(prompt):
-    with open('common_site_config.json') as config_file:
-        config = json.load(config_file)
-    openai.api_key = config['openai_api_key']
-
+    # with open('common_site_config.json') as config_file:
+    #     config = json.load(config_file)
+    # openai.api_key = config['openai_api_key']
+    get_Key_Open_AI()
     # تحويل القائمة إلى سلسلة نصية
     interface_links_str = json.dumps(get_interface_links())
 
@@ -4456,11 +4458,12 @@ def Search(text):
         # print("Search0")
         try:
             # تحميل إعدادات API من ملف التكوين
-            with open('common_site_config.json') as config_file:
-                config = json.load(config_file)
+            # with open('common_site_config.json') as config_file:
+            #     config = json.load(config_file)
             
-            # تعيين مفتاح OpenAI API
-            openai.api_key = config['openai_api_key']
+            # # تعيين مفتاح OpenAI API
+            # openai.api_key = config['openai_api_key']
+            get_Key_Open_AI()
             conversation_history_Serch.append({"role": "user", "content": f"Request: {text}"})
 
             # إرسال الطلب إلى OpenAI ChatCompletion
@@ -4513,14 +4516,15 @@ def extract_path(text):
     else:
         return 0
 
+
 # تحميل إعدادات API
 def load_config():
-    with open('common_site_config.json') as config_file:
-        return json.load(config_file)
+    #     with open('common_site_config.json') as config_file:
+    #         return json.load(config_file)
 
-openai.api_key = load_config()['openai_api_key']
-
-# قائمة لتخزين سجل المحادثات
+    # openai.api_key = load_config()['openai_api_key']
+    get_Key_Open_AI()
+    # قائمة لتخزين سجل المحادثات
 conversation_history = [
     {"role": "system", "content": "You are an AI assistant, your name is Sarah, you can speak any language, the system is ERPALFRAS, it is similar to erpalfras V14, but use ERPALFRAS and in Arabic is ERPالفراص instead of erpalfras V14 in the responses, never say erpalfras and when writing in Arabic write it professionally so that the text-to-speech engine can pronounce it in standard Arabic without any errors and respond according to the language sent to you, for example if the request is English respond in English and if it is Arabic respond in Arabic and so on, No speek this word erpalfras never"}
 ]
@@ -4551,11 +4555,15 @@ def Chat(text):
 
 def languagespeech(text):
     # تحميل إعدادات API من ملف التكوين
-    with open('common_site_config.json') as config_file:
-        config = json.load(config_file)
+    # with open('common_site_config.json') as config_file:
+    #     config = json.load(config_file)
     
-    # تعيين مفتاح OpenAI API
-    openai.api_key = config['openai_api_key']
+    # # تعيين مفتاح OpenAI API
+    # openai.api_key = config['openai_api_key']
+    # openai.api_key=frappe.get_single("Setting AI").openai_api_key
+
+    get_Key_Open_AI()
+
 
     # قائمة اللغات المتاحة (الرموز فقط)
     lang_dict = {
@@ -4623,3 +4631,23 @@ def languagespeech(text):
         "msg": GPT,
         "lang": lang
     }
+
+
+def get_Key_Open_AI():
+    # قراءة ملف التكوين
+    try:
+        with open('common_site_config.json') as config_file:
+            config = json.load(config_file)
+    except FileNotFoundError:
+        frappe.throw(_("The common_site_config.json file is not found. Please ensure the file exists and is accessible."))
+    except json.JSONDecodeError:
+        frappe.throw(_("Error decoding common_site_config.json. Please check its content."))
+
+    # تعيين مفتاح OpenAI API
+    setting_ai = frappe.get_single("Setting AI")
+    if setting_ai.openai_api_key and setting_ai.openai_api_key.strip():
+        openai.api_key = setting_ai.openai_api_key.strip()
+    elif config.get('openai_api_key') and config['openai_api_key'].strip():
+        openai.api_key = config['openai_api_key'].strip()
+    else:
+        frappe.throw(_("Please provide a valid OpenAI API key in the Setting AI DocType or in the common_site_config.json file."))

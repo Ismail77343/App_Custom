@@ -88,7 +88,7 @@ function addCustomButton() {
 // بدء المحاولة لإضافة الزر بعد تحميل الصفحة
 setTimeout(addCustomButton, 500);
 setTimeout(rotatimage, 500);
-setTimeout(record, 500);
+// setTimeout(record, 500);
 
 
 
