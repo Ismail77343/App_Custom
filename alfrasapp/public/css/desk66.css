@@ -3,6 +3,15 @@
   background: black !important;
 } */
 
+:root,
+[data-theme="light"]{
+  --subtle-fg:#0788c9 !important;
+  --control-bg:#00b2ff91 !important;
+  --btn-default-hover-bg:#0788c9 !important;
+}
+.datatable{
+  --dt-border-color:#0788c9 !important;
+}
  .navbar{
   height: 86px;
   box-shadow: 0 5px 7px -1px rgba(0, 142, 204, 0.3) !important;
@@ -16,12 +25,12 @@
     padding-bottom: 5px !important;
     border-radius: 8px !important;
     padding: 19px !important;
-    border: 3px black solid;
+    border: 3px var(--primary) solid;
  }
  #navbar-search{
   border-radius: 8px !important;
   padding: 19px !important;
-  border: 3px black solid;
+  border: 3px var(--primary) solid;
   width: 94% !important;
   z-index: 1;
   height: 48px;
@@ -31,6 +40,7 @@
  }
  #navbar-breadcrumbs{
   display: block !important;
+  margin: 0 !important;
  }
  
  @media screen and (min-width: 600px) {
@@ -38,6 +48,7 @@
   .search-bar .search-icon{
     position: absolute;
     right: 0px;
+    z-index: 1;
     display: flex;
     align-items: center;
     height: 100%;
@@ -45,7 +56,7 @@
     height: 101%;
     color: var(--light);
     text-align: center;
-    background-color: black;
+    background-color: var(--primary);
     cursor: pointer;
     border: none;
     height: 55px;
@@ -114,7 +125,9 @@
   border: 1px solid #ccc;
   border-right: none;
 }
-
+.datatable .dt-header .dt-cell--header .dt-cell__content{
+  color: white;
+}
 .search-bar button {
   padding: 10px;
   background-color: orange;
@@ -181,4 +194,28 @@ select,textarea,.list-sidebar-button,.custom-btn-group button[data-toggle="dropd
 }
 .page-head{
   margin: 0 !important;
+  border-bottom:1px var(--primary) solid ;
+}
+.page-body{
+  max-width: 100% !important;
+  width: 100% !important;
+}
+.widget.onboarding-widget-box .widget-body .onboarding-step.skipped{
+  background: #07a2f0  !important;
+}
+
+.selected .es-icon,button:hover .es-icon,a:hover .es-icon,a:hover .icon,button:hover .icon{
+	fill:white !important;
+	stroke:white !important;
+}
+.btn-default:hover{
+	color: white !important;
+}
+.page-head{
+  position:fixed !important;
+  top:20% !important;
+  width: 100% !important;
+}
+.page-body{
+  margin-top:7% !important ;
 }
